@@ -92,6 +92,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22.4.1"
+          registry-url: "https://registry.npmjs.org"
+          always-auth: true'
 
       # Configure npm to use the npm token
       - name: Configure npm authentication
