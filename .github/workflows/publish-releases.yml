@@ -96,19 +96,6 @@ jobs:
           always-auth: true'
           auth-token: ${{ secrets.NPM_TOKEN }}
 
-      - name: Verify NPM Authentication
-        run: |
-          echo "NPM_TOKEN: ${{ secrets.NPM_TOKEN }}"
-          # npm whoami
-
-      # Optional: also write .npmrc manually if needed
-      - name: Configure .npmrc in repo root
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-
-      # Debug: Check .npmrc contents (remove for production)
-      - name: Debug .npmrc
-        run: cat .npmrc
-
       - name: Install Dependencies
         run: npm ci
 
@@ -137,6 +124,12 @@ jobs:
           GIT_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
 
       - name: Publish to npm
-        run: npm publish
+        run: |
+          if npm publish; then
+            echo "Published version ${{ github.event.inputs.npm_version }} to npm"
+          else
+            echo "Failed to publish version ${{ github.event.inputs.npm_version }}to npm"
+            exit 1
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
