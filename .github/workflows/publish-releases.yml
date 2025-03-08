@@ -112,9 +112,14 @@ jobs:
           npm version ${{ github.event.inputs.npm_version }} --no-git-tag-version
           git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
           git config --global user.name "${{ secrets.GIT_USER_NAME }}"
-          git add package.json
-          git commit -m "chore: release version ${{ github.event.inputs.npm_version }}"
-          git push
+          if ! git diff --quiet HEAD -- package.json; then
+            echo "Changes detected in package.json. Committing..."
+            git add package.json
+            git commit -m "chore: release version ${{ github.event.inputs.npm_version }}"
+            git push
+          else
+            echo "No changes in package.json to commit."
+          fi
         env:
           GIT_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
 
