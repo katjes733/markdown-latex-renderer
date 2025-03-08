@@ -13,7 +13,7 @@
   "files": [
     "./dist"
   ],
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A simple plugin for rendering markdown with LaTeX messages in React ChatBotify.",
   "type": "module",
   "main": "./dist/index.cjs",
