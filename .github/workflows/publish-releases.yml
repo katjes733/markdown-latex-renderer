@@ -99,7 +99,7 @@ jobs:
       - name: Verify NPM Authentication
         run: |
           echo "NPM_TOKEN: ${{ secrets.NPM_TOKEN }}"
-          npm whoami
+          # npm whoami
 
       # Optional: also write .npmrc manually if needed
       - name: Configure .npmrc in repo root
