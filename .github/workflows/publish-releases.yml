@@ -109,7 +109,11 @@ jobs:
       - name: Update package version
         if: ${{ github.event.inputs.npm_version }}
         run: |
-          npm version ${{ github.event.inputs.npm_version }} --no-git-tag-version
+          if npm version ${{ github.event.inputs.npm_version }} --no-git-tag-version; then
+            echo "Updated package version to ${{ github.event.inputs.npm_version }}"
+          else
+            echo "Package version already set to ${{ github.event.inputs.npm_version }}"
+          fi
           git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
           git config --global user.name "${{ secrets.GIT_USER_NAME }}"
           if ! git diff --quiet HEAD -- package.json; then
