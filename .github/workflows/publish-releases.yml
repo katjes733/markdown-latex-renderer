@@ -92,9 +92,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22.4.1"
-          registry-url: "https://registry.npmjs.org"
-          always-auth: true'
-          auth-token: ${{ secrets.NPM_TOKEN }}
 
       - name: Install Dependencies
         run: npm ci
@@ -128,7 +125,7 @@ jobs:
           if npm publish; then
             echo "Published version ${{ github.event.inputs.npm_version }} to npm"
           else
-            echo "Failed to publish version ${{ github.event.inputs.npm_version }}to npm"
+            echo "Failed to publish version ${{ github.event.inputs.npm_version }} to npm"
             exit 1
           fi
         env:
