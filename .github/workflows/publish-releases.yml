@@ -8,29 +8,29 @@ on:
   workflow_dispatch:
     inputs:
       publish_to_github:
-        description: 'Publish to GitHub Release'
+        description: "Publish to GitHub Release"
         required: false
-        default: 'false'
+        default: "false"
         type: boolean
       publish_to_npm:
-        description: 'Publish to npm'
+        description: "Publish to npm"
         required: false
-        default: 'false'
+        default: "false"
         type: boolean
       github_tag:
-        description: 'Release tag for GitHub (e.g., v1.0.0)'
+        description: "Release tag for GitHub (e.g., v1.0.0)"
         required: false
         type: string
       github_release_notes:
-        description: 'Release notes for GitHub'
+        description: "Release notes for GitHub"
         required: false
         type: string
       npm_version:
-        description: 'npm package version (e.g., 1.0.0)'
+        description: "npm package version (e.g., 1.0.0)"
         required: false
         type: string
       npm_release_notes:
-        description: 'Release notes for npm'
+        description: "Release notes for npm"
         required: false
         type: string
 
@@ -108,6 +108,8 @@ jobs:
           git add package.json
           git commit -m "chore: release version ${{ github.event.inputs.npm_version }}"
           git push
+        env:
+          GIT_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
 
       - name: Publish to npm
         run: npm publish
