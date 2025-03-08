@@ -94,13 +94,18 @@ jobs:
           node-version: "22.4.1"
           registry-url: "https://registry.npmjs.org"
           always-auth: true'
+          auth-token: ${{ secrets.NPM_TOKEN }}
 
-      # Configure npm to use the npm token
-      - name: Configure npm authentication
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Verify NPM Authentication
+        run: npm whoami
+
+      # Optional: also write .npmrc manually if needed
+      - name: Configure .npmrc in repo root
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
+      # Debug: Check .npmrc contents (remove for production)
+      - name: Debug .npmrc
+        run: cat .npmrc
 
       - name: Install Dependencies
         run: npm ci
