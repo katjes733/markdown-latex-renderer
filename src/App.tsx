@@ -7,11 +7,29 @@ import MarkdownLatexWrapper from "./components/MarkdownLatexWrapper";
 const mdLatexText = `
 ### Markdown with LaTeX
 
+#### Example 1 with \`$\` delimiter
+
 Given a **formula** below
 $$
 s = ut + \\frac{1}{2}at^{2}
 $$
 Calculate the value of $s$ when $u = 10\\frac{m}{s}$ and $a = 2\\frac{m}{s^{2}}$ at $t = 1s$
+
+#### Example 2 with \`[\`, \`]\`, \`(\` and \`)\` delimiters
+
+The area \\( A \\) of a circle is given by the formula:
+
+\\[ A = \\pi r^2 \\]
+
+where \\( r \\) is the radius of the circle. For a circle with a radius of 5, we substitute \\( r = 5 \\) into the formula:
+
+\\[ A = \\pi (5)^2 \\]
+\\[ A = \\pi \\times 25 \\]
+\\[ A = 25\\pi \\]
+
+Therefore, the area of the circle is:
+
+\\[ \\boxed{25\\pi} \\]
 `;
 
 const App = () => {
