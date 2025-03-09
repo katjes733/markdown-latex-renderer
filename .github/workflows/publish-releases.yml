@@ -115,14 +115,17 @@ jobs:
           git config --global user.name "${{ secrets.GIT_USER_NAME }}"
           if ! git diff --quiet HEAD -- package.json; then
             echo "Changes detected in package.json. Committing..."
-            git add package.json
-            git commit -m "chore: release version ${{ github.event.inputs.npm_version }}"
-            git push
+            git checkout -b release-branch
+            git commit -am "chore: release version $(node -p "require('./package.json').version")"
+            git push origin release-branch
+            gh pr create --title "Release version $(node -p "require('./package.json').version")" --body "Automated release of version $(node -p "require('./package.json').version")"
+            gh pr merge --auto -d
           else
             echo "No changes in package.json to commit."
           fi
         env:
           GIT_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
 
       - name: Publish to npm
         run: |
