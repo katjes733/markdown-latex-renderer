@@ -119,7 +119,7 @@ jobs:
             git commit -am "chore: release version $(node -p "require('./package.json').version")"
             git push origin release-branch
             gh pr create --title "Release version $(node -p "require('./package.json').version")" --body "Automated release of version $(node -p "require('./package.json').version")"
-            gh pr merge --auto -d -s --admin
+            gh pr merge --admin -d -s
           else
             echo "No changes in package.json to commit."
           fi
