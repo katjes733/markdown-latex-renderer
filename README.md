@@ -17,7 +17,7 @@
 
 ### Introduction
 
-**Markdown Renderer** is a plugin that adds support for rendering markdown in chat bubbles within the [**React ChatBotify Core Library**](https://react-chatbotify.com). By default, the core library does not ship with markdown support. This plugin relies on chatbot events to intercept messages and determine if markdown rendering logic has to be applied. The demo gif above should give you a pretty good idea of what this plugin is capable of doing.
+**Markdown Renderer** is a plugin that adds support for rendering markdown in chat bubbles within the [**React ChatBotify Core Library**](https://react-chatbotify.com). By default, the core library does not ship with markdown support. This plugin relies on chatbot events to intercept messages and determine if markdown rendering logic has to be applied.
 
 ### Quickstart
 
