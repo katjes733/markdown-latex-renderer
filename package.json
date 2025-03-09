@@ -8,7 +8,8 @@
     "conversational-bot",
     "conversational-ui",
     "frontend-library",
-    "plugins"
+    "plugins",
+    "react-chatbotify"
   ],
   "files": [
     "./dist"
